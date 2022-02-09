@@ -52,7 +52,7 @@ public class DiscordMessageEvent extends ListenerAdapter {
                 messageIsTooLong(e, message.toString());
             }
             else {
-                GroupmeMessageCreator gmeMessage = new GroupmeMessageCreator("<" + e.getAuthor().getName() + "> " + message, false, attachments, e.getMember());
+                GroupmeMessageCreator gmeMessage = new GroupmeMessageCreator("<" + e.getMember().getNickname() + "> " + message, false, attachments, e.getMember());
                 GroupmeMessageSender.sendMessageToGroupMe(gmeMessage.getMessage());
             }
         }
@@ -60,9 +60,9 @@ public class DiscordMessageEvent extends ListenerAdapter {
 
     private void messageIsTooLong(MessageReceivedEvent e, String message) {
         try {
-            Paste paste = new Paste("<" + e.getAuthor().getName() + "> " + message);
+            Paste paste = new Paste("<" + e.getMember().getNickname() + "> " + message);
             String url = new PasteggUploader(paste).uploadToPastegg();
-            GroupmeMessageCreator sysMessage = new GroupmeMessageCreator("Message from user " + e.getAuthor().getName() + " is too long! Paste.gg link: " + url, true, e.getMember());
+            GroupmeMessageCreator sysMessage = new GroupmeMessageCreator("Message from user " + e.getMember().getNickname() + " is too long! Paste.gg link: " + url, true, e.getMember());
             GroupmeMessageSender.sendMessageToGroupMe(sysMessage.getMessage());
         } catch (Exception ex) {
             logger.error("Exception thrown! Letting Discord know their message will not be delivered...", ex);
