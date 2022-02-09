@@ -18,6 +18,7 @@ public class SerializerDeserializer {
 
     static {
         mapper = new ObjectMapper();
+        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public static GroupmeMessage deserializeMessageGivenString(String json) throws IOException {
