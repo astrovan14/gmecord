@@ -2,6 +2,8 @@ package io.banditoz.gmecord.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import io.banditoz.gmecord.Settings;
 import io.banditoz.gmecord.api.BotMessage;
 import io.banditoz.gmecord.api.GroupmeMessage;
@@ -18,7 +20,9 @@ public class SerializerDeserializer {
 
     static {
         mapper = new ObjectMapper();
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        see: https://www.cowtowncoder.com/blog/archives/2012/04/entry_469.html
+//        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public static GroupmeMessage deserializeMessageGivenString(String json) throws IOException {
