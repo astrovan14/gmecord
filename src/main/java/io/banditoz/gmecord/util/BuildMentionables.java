@@ -41,6 +41,7 @@ public class BuildMentionables {
         for (net.dv8tion.jda.api.entities.Member member : g.getMembers()) {
             User u = member.getUser();
             mentionables.put(u.getName(), u.getId());
+            mentionables.put(member.getNickname(), u.getId());
         }
         LOGGER.info("We have " + mentionables.size() + " Discord members.");
         return mentionables;
