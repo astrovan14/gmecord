@@ -50,7 +50,19 @@ mention Groupme users.
 * `port`: The port the webserver that handles incoming Groupme messages
 listens on.
 
+## Docker setup
+```
+mkdir gmecord-docker
+cd gmecord-docker
+wget https://raw.githubusercontent.com/astrovan14/gmecord/master/Dockerfile
+wget https://raw.githubusercontent.com/astrovan14/gmecord/master/Config.json
+nano Config.json #edit the config file and set all the values as described above
+docker build -t gmecord .
+docker run -d -p 4567:4567 --restart=always -t gmecord
+```
+After this, set up an https proxy from any domain that you choose, to localhost:4567. Then go to the groupme [bot settings](https://dev.groupme.com/bots) and set the callback URL to `https://yourwebusername:yourwebpassword@subdomain.yourdomain.com/msg/`. `yourwebusername` and `yourwebpassword` should be changed to whatever you put for `username` and `password` in the config file, and `subdomain.yourdomain.com` should be changed to whatever domain you set up the https proxy on.
+
 ## Builds
 Builds will be periodically posted to this repository's
-[Github Releases page.](https://github.com/HeyBanditoz/gmecord/releases)
-They will be built for Java 11.
+[Github Releases page.](https://github.com/astrovan14/gmecord/releases)
+They will be built for Java 11. Check the parent repository for [old releases](https://github.com/HeyBanditoz/gmecord/releases).
