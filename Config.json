@@ -1,0 +1,12 @@
+{
+  "discordToken" : "Discord bot token here",
+  "groupMeToken" : "GroupMe access token here",
+  "botID" : "Groupme Bot ID here",
+  "channel" : "Channel to be mapped here",
+  "webAuthenticationEnabled" : true,
+  "username" : "Web username here",
+  "password" : "Web password here",
+  "botName" : "Put bot username here (so it doesn't respond to its own messages.)",
+  "groupID" : "The Groupme group ID we are in",
+  "port" : 4567
+}
