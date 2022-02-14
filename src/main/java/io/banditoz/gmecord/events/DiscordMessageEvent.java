@@ -52,7 +52,11 @@ public class DiscordMessageEvent extends ListenerAdapter {
                 messageIsTooLong(e, message.toString());
             }
             else {
-                GroupmeMessageCreator gmeMessage = new GroupmeMessageCreator("<" + e.getMember().getNickname() + "> " + message, false, attachments, e.getMember());
+                String nameTemp = e.getMember().getNickname();
+                if (nameTemp == null){
+                    nameTemp = e.getAuthor().getName();
+                }
+                GroupmeMessageCreator gmeMessage = new GroupmeMessageCreator("<" + nameTemp + "> " + message, false, attachments, e.getMember());
                 GroupmeMessageSender.sendMessageToGroupMe(gmeMessage.getMessage());
             }
         }
