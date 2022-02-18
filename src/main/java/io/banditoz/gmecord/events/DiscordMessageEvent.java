@@ -64,9 +64,13 @@ public class DiscordMessageEvent extends ListenerAdapter {
 
     private void messageIsTooLong(MessageReceivedEvent e, String message) {
         try {
-            Paste paste = new Paste("<" + e.getMember().getNickname() + "> " + message);
+            String nameTemp = e.getMember().getNickname();
+            if (nameTemp == null){
+                nameTemp = e.getAuthor().getName();
+            }
+            Paste paste = new Paste("<" + nameTemp + "> " + message);
             String url = new PasteggUploader(paste).uploadToPastegg();
-            GroupmeMessageCreator sysMessage = new GroupmeMessageCreator("Message from user " + e.getMember().getNickname() + " is too long! Paste.gg link: " + url, true, e.getMember());
+            GroupmeMessageCreator sysMessage = new GroupmeMessageCreator("Message from user " + nameTemp + " is too long! Paste.gg link: " + url, true, e.getMember());
             GroupmeMessageSender.sendMessageToGroupMe(sysMessage.getMessage());
         } catch (Exception ex) {
             logger.error("Exception thrown! Letting Discord know their message will not be delivered...", ex);
